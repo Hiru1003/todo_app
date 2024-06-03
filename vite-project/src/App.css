@@ -4,7 +4,7 @@
   height: 100vh;
   padding: 20px;
   border: 1px solid #f34141;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #fefdfd;
   display: flex;
   justify-content: center;
@@ -34,20 +34,24 @@
 }
 
 .input-container input[type='text'] {
-  padding: 10px;
-  width: 100%;
+  padding: 20px;
+  width: 95%;
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .input-container button {
-  padding: 10px 20px;
+  padding: 15px 20px;
+  width: 95%;
   border: none;
   border-radius: 5px;
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-container button:hover {
@@ -56,8 +60,15 @@
 
 .task-list-container {
   background-color: #cfe2f3;
-  padding: 20px;
+  padding:  20px;
   border-radius: 5px;
+  width: 93%;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-list-container h2 {
+  color: black;
 }
 
 ul {
@@ -79,4 +90,5 @@ ul li {
 
 .task-buttons button {
   margin-right: 10px;
+  width: auto;
 }
