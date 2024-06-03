@@ -1,35 +1,95 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.js
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedTask, setEditedTask] = useState('');
+
+  const handleInputChange = (event) => {
+    setNewTask(event.target.value);
+  };
+
+  const addTask = () => {
+    if (newTask.trim() !== '') {
+      setTasks([...tasks, newTask]);
+      setNewTask('');
+    }
+  };
+
+  const deleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
+  const startEditing = (index) => {
+    setEditingIndex(index);
+    setEditedTask(tasks[index]);
+  };
+
+  const cancelEditing = () => {
+    setEditingIndex(null);
+    setEditedTask('');
+  };
+
+  const saveEditedTask = () => {
+    const updatedTasks = [...tasks];
+    updatedTasks[editingIndex] = editedTask;
+    setTasks(updatedTasks);
+    setEditingIndex(null);
+    setEditedTask('');
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="input-column">
+        <h1>To-Do List</h1>
+        <div className="input-container">
+          <input
+            type="text"
+            value={newTask}
+            onChange={handleInputChange}
+            placeholder="Add a new task..."
+          />
+          <button onClick={addTask}>Add</button>
+        </div>
+        <div className="task-list-container">
+          <h2>Tasks</h2>
+          <ul>
+            {tasks.map((task, index) => (
+              <li key={index}>
+                {index === editingIndex ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editedTask}
+                      onChange={(e) => setEditedTask(e.target.value)}
+                    />
+                    <div className="task-buttons">
+                      <button onClick={saveEditedTask}>Save</button>
+                      <button onClick={cancelEditing}>Cancel</button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {task}
+                    <div className="task-buttons">
+                      <button onClick={() => startEditing(index)}>Edit</button>
+                      <button onClick={() => deleteTask(index)}>Delete</button>
+                    </div>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
+
