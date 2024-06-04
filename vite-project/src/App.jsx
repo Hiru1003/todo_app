@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [newTask, setNewTask] = useState('');
   const [tasks, setTasks] = useState([]);
+  const [doneTasks, setDoneTasks] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState('');
 
@@ -42,6 +43,18 @@ function App() {
     setEditedTask('');
   };
 
+  const moveTaskToDone = (index) => {
+    const taskToMove = tasks[index];
+    deleteTask(index);
+    setDoneTasks([...doneTasks, taskToMove]);
+  };
+
+  const deleteDoneTask = (index) => {
+    const updatedDoneTasks = [...doneTasks];
+    updatedDoneTasks.splice(index, 1);
+    setDoneTasks(updatedDoneTasks);
+  };
+
   return (
     <div className="container">
       <div className="input-column">
@@ -56,7 +69,6 @@ function App() {
           <button onClick={addTask}>Add</button>
         </div>
         <div className="task-list-container">
-
           <h2>Tasks</h2>
           <ul className="task-cards">
             {tasks.map((task, index) => (
@@ -79,9 +91,23 @@ function App() {
                     <div className="task-buttons">
                       <button onClick={() => startEditing(index)}>Edit</button>
                       <button onClick={() => deleteTask(index)}>Delete</button>
+                      <button onClick={() => moveTaskToDone(index)}>Done</button>
                     </div>
                   </>
                 )}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="done-tasks-container">
+          <h2>Done</h2>
+          <ul className="done-tasks">
+            {doneTasks.map((task, index) => (
+              <li key={index} className="task-card">
+                <span className="task-text">{task}</span>
+                <div className="task-buttons">
+                  <button onClick={() => deleteDoneTask(index)}>Delete</button>
+                </div>
               </li>
             ))}
           </ul>
