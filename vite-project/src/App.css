@@ -151,7 +151,7 @@ h1 {
 }
 
 .priority-badge.low {
-  background-color: green;
+  background-color: salmon;
   border: 3px solid #000;
   color: white;
 }
@@ -220,12 +220,32 @@ h1 {
 
 .done-tasks .task-buttons {
   display: flex;
-  gap: 3%;
-  margin-top: 5%;
+  gap: 5%;
+  margin-top: 7%;
   width: 20%;
   align-items: center;
 }
 
 .done-tasks .task-buttons button {
   padding: 15px;
+}
+
+.done-tasks .task-date {
+  color: #898585;
+  font-size: medium;
+  margin-top: 30px;
+}
+
+.completed-badge {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 6px 12px; 
+  border-radius: 5px;
+  font-size: small;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #28a745; 
+  border: 3px solid #000;
+  color: white;
 }
