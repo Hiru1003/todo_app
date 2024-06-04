@@ -25,7 +25,7 @@ function App() {
 
   const addTask = () => {
     if (newTask.trim() !== '') {
-      const taskToAdd = { task: newTask, date: taskDate }; // Include task date
+      const taskToAdd = { task: newTask, date: taskDate, completedAt: null }; // Include task date and completion time
       setTasks([...tasks, taskToAdd]);
       setTaskPriorities({ ...taskPriorities, [newTask]: priority });
       setNewTask('');
@@ -59,6 +59,8 @@ function App() {
 
   const moveTaskToDone = (index) => {
     const taskToMove = tasks[index];
+    const completedAt = new Date().toLocaleString(); // Record completion time
+    taskToMove.completedAt = completedAt;
     deleteTask(index);
     setDoneTasks([...doneTasks, taskToMove]);
   };
@@ -97,15 +99,30 @@ function App() {
           <ul className="task-cards">
             {tasks.map((task, index) => (
               <li key={index} className="task-card">
-                <span className="task-text">{task.task}</span>
-                <span className="task-date">{task.date}</span> {/* Render task date */}
+                {editingIndex === index ? (
+                  <input
+                    type="text"
+                    value={editedTask}
+                    onChange={(e) => setEditedTask(e.target.value)}
+                  />
+                ) : (
+                  <span className="task-text">{task.task}</span>
+                )}
+                <span className="task-date">{task.date}</span>
                 {taskPriorities[task.task] && (
                   <span className={`priority-badge ${taskPriorities[task.task].toLowerCase()}`}>
                     {taskPriorities[task.task]}
                   </span>
                 )}
                 <div className="task-buttons">
-                  <button onClick={() => startEditing(index)}>Edit</button>
+                  {editingIndex === index ? (
+                    <>
+                      <button onClick={saveEditedTask}>Save</button>
+                      <button onClick={cancelEditing}>Cancel</button>
+                    </>
+                  ) : (
+                    <button onClick={() => startEditing(index)}>Edit</button>
+                  )}
                   <button onClick={() => deleteTask(index)}>Delete</button>
                   <button onClick={() => moveTaskToDone(index)}>Done</button>
                 </div>
@@ -116,14 +133,16 @@ function App() {
         <div className="done-tasks-container">
           <h2>Done</h2>
           <ul className="done-tasks">
-            {doneTasks.map((task, index) => (
-              <li key={index} className="task-card">
-                <span className="task-text">{task.task}</span>
-                <div className="task-buttons">
-                  <button onClick={() => deleteDoneTask(index)}>Delete</button>
-                </div>
-              </li>
-            ))}
+          {doneTasks.map((task, index) => (
+            <li key={index} className="task-card">
+              <span className="task-text">{task.task}</span>
+              <span className="task-date">{task.date}</span>
+              <span className="completed-badge">Completed</span> {/* Add completed badge */}
+              <div className="task-buttons">
+                <button onClick={() => deleteDoneTask(index)}>Delete</button>
+              </div>
+            </li>
+          ))}
           </ul>
         </div>
       </div>
