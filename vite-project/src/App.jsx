@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import './App.css';
 
@@ -58,9 +57,9 @@ function App() {
         </div>
         <div className="task-list-container">
           <h2>Tasks</h2>
-          <ul>
+          <ul className="task-cards">
             {tasks.map((task, index) => (
-              <li key={index}>
+              <li key={index} className="task-card">
                 {index === editingIndex ? (
                   <>
                     <input
@@ -75,7 +74,7 @@ function App() {
                   </>
                 ) : (
                   <>
-                    {task}
+                    <span className="task-text">{task}</span>
                     <div className="task-buttons">
                       <button onClick={() => startEditing(index)}>Edit</button>
                       <button onClick={() => deleteTask(index)}>Delete</button>
@@ -92,4 +91,3 @@ function App() {
 }
 
 export default App;
-
