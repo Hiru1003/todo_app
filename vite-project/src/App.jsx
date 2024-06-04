@@ -52,11 +52,14 @@ function App() {
   const saveEditedTask = () => {
     const updatedTasks = [...tasks];
     updatedTasks[editingIndex].task = editedTask;
+    // Retain the priority for the edited task
+    const taskKey = updatedTasks[editingIndex].task;
+    updatedTasks[editingIndex].priority = taskPriorities[taskKey];
     setTasks(updatedTasks);
     setEditingIndex(null);
     setEditedTask('');
   };
-
+  
   const moveTaskToDone = (index) => {
     const taskToMove = tasks[index];
     const completedAt = new Date().toLocaleString(); // Record completion time
@@ -135,13 +138,13 @@ function App() {
           <ul className="done-tasks">
           {doneTasks.map((task, index) => (
             <li key={index} className="task-card">
-              <span className="task-text">{task.task}</span>
-              <span className="task-date">{task.date}</span>
-              <span className="completed-badge">Completed</span> {/* Add completed badge */}
-              <div className="task-buttons">
-                <button onClick={() => deleteDoneTask(index)}>Delete</button>
-              </div>
-            </li>
+            <span className="task-text">{task.task}</span>
+            <span className="task-date">Task Completed At : {task.completedAt}</span>
+            <span className="completed-badge">Completed</span> 
+            <div className="task-buttons">
+              <button onClick={() => deleteDoneTask(index)}>Delete</button>
+            </div>
+          </li>
           ))}
           </ul>
         </div>
