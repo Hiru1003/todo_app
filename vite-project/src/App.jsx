@@ -25,7 +25,7 @@ function App() {
 
   const addTask = () => {
     if (newTask.trim() !== '') {
-      const taskToAdd = { task: newTask, date: taskDate, completedAt: null }; // Include task date and completion time
+      const taskToAdd = { task: newTask, date: taskDate, completedAt: null }; 
       setTasks([...tasks, taskToAdd]);
       setTaskPriorities({ ...taskPriorities, [newTask]: priority });
       setNewTask('');
@@ -59,7 +59,7 @@ function App() {
     setEditingIndex(null);
     setEditedTask('');
   };
-  
+
   const moveTaskToDone = (index) => {
     const taskToMove = tasks[index];
     const completedAt = new Date().toLocaleString(); // Record completion time
@@ -131,6 +131,7 @@ function App() {
                 </div>
               </li>
             ))}
+            
           </ul>
         </div>
         <div className="done-tasks-container">
