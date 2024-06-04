@@ -3,19 +3,33 @@ import './App.css';
 
 function App() {
   const [newTask, setNewTask] = useState('');
+  const [priority, setPriority] = useState('Low');
+  const [taskDate, setTaskDate] = useState('');
   const [tasks, setTasks] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState('');
+  const [taskPriorities, setTaskPriorities] = useState({});
 
   const handleInputChange = (event) => {
     setNewTask(event.target.value);
   };
 
+  const handlePriorityChange = (event) => {
+    setPriority(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setTaskDate(event.target.value);
+  };
+
   const addTask = () => {
     if (newTask.trim() !== '') {
-      setTasks([...tasks, newTask]);
+      const taskToAdd = { task: newTask, date: taskDate }; // Include task date
+      setTasks([...tasks, taskToAdd]);
+      setTaskPriorities({ ...taskPriorities, [newTask]: priority });
       setNewTask('');
+      setTaskDate('');
     }
   };
 
@@ -27,7 +41,7 @@ function App() {
 
   const startEditing = (index) => {
     setEditingIndex(index);
-    setEditedTask(tasks[index]);
+    setEditedTask(tasks[index].task);
   };
 
   const cancelEditing = () => {
@@ -37,7 +51,7 @@ function App() {
 
   const saveEditedTask = () => {
     const updatedTasks = [...tasks];
-    updatedTasks[editingIndex] = editedTask;
+    updatedTasks[editingIndex].task = editedTask;
     setTasks(updatedTasks);
     setEditingIndex(null);
     setEditedTask('');
@@ -66,6 +80,16 @@ function App() {
             onChange={handleInputChange}
             placeholder="Add a new task..."
           />
+          <select value={priority} onChange={handlePriorityChange}>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <input
+            type="date"
+            value={taskDate}
+            onChange={handleDateChange}
+          />
           <button onClick={addTask}>Add</button>
         </div>
         <div className="task-list-container">
@@ -73,28 +97,18 @@ function App() {
           <ul className="task-cards">
             {tasks.map((task, index) => (
               <li key={index} className="task-card">
-                {index === editingIndex ? (
-                  <>
-                    <input
-                      type="text"
-                      value={editedTask}
-                      onChange={(e) => setEditedTask(e.target.value)}
-                    />
-                    <div className="task-buttons">
-                      <button onClick={saveEditedTask}>Save</button>
-                      <button onClick={cancelEditing}>Cancel</button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <span className="task-text">{task}</span>
-                    <div className="task-buttons">
-                      <button onClick={() => startEditing(index)}>Edit</button>
-                      <button onClick={() => deleteTask(index)}>Delete</button>
-                      <button onClick={() => moveTaskToDone(index)}>Done</button>
-                    </div>
-                  </>
+                <span className="task-text">{task.task}</span>
+                <span className="task-date">{task.date}</span> {/* Render task date */}
+                {taskPriorities[task.task] && (
+                  <span className={`priority-badge ${taskPriorities[task.task].toLowerCase()}`}>
+                    {taskPriorities[task.task]}
+                  </span>
                 )}
+                <div className="task-buttons">
+                  <button onClick={() => startEditing(index)}>Edit</button>
+                  <button onClick={() => deleteTask(index)}>Delete</button>
+                  <button onClick={() => moveTaskToDone(index)}>Done</button>
+                </div>
               </li>
             ))}
           </ul>
@@ -104,7 +118,7 @@ function App() {
           <ul className="done-tasks">
             {doneTasks.map((task, index) => (
               <li key={index} className="task-card">
-                <span className="task-text">{task}</span>
+                <span className="task-text">{task.task}</span>
                 <div className="task-buttons">
                   <button onClick={() => deleteDoneTask(index)}>Delete</button>
                 </div>

@@ -1,18 +1,17 @@
-/* App.css */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 100vh;
   width: 100vw;
+  background: #f9f5f5; /* Background color */
 }
 
 h1 {
@@ -43,22 +42,32 @@ h1 {
 .input-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .input-container input[type='text'] {
-  padding: 15px;
+  padding: 12px;
   width: 100%;
   border-radius: 5px;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  font-size: medium; 
+}
+
+.input-container select {
+  padding: 12px 20px;
+  font-size: medium; 
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
   box-sizing: border-box;
 }
 
 .input-container button {
   padding: 15px;
-  width: 100%;
+  width: 150px;
   border: none;
   border-radius: 5px;
   background-color: #007bff;
@@ -73,7 +82,7 @@ h1 {
 
 .task-list-container {
   background-color: #cfe2f3;
-  padding: 10% 5% 5%; 
+  padding: 10% 5% 5%;
   border-radius: 5px;
   height: auto;
   width: 90vw;
@@ -94,10 +103,11 @@ h1 {
 }
 
 .task-card {
+  position: relative;
   background-color: #fff;
-  border: 2px solid #000; 
+  border: 2px solid #000;
   border-radius: 5px;
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 5) ; 
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 5);
   padding: 10px;
   box-sizing: border-box;
 }
@@ -105,6 +115,39 @@ h1 {
 .task-text {
   color: black;
   font-size: large;
+}
+
+.task-date {
+  color: #666;
+  font-size: small;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.priority-badge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 6px 12px; 
+  border-radius: 5px;
+  font-size: small;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.priority-badge.low {
+  background-color: green;
+  color: white;
+}
+
+.priority-badge.medium {
+  background-color: yellow;
+}
+
+.priority-badge.high {
+  background-color: red;
+  color: white;
 }
 
 .task-buttons {
@@ -116,14 +159,14 @@ h1 {
 }
 
 .task-buttons button {
-  padding: 10px; 
+  padding: 10px;
   width: 100%;
 }
 
 .done-tasks-container {
   background-color: #cfe2f3;
   padding: 20px;
-  padding: 10% 5% 5%; 
+  padding: 10% 5% 5%;
   border-radius: 5px;
   margin-top: 20px;
   height: auto;
@@ -151,7 +194,7 @@ h1 {
   box-shadow: 0 7px 14px rgba(0, 0, 0, 1);
   padding: 10px;
   box-sizing: border-box;
-  flex-grow: 1; /* Allow the cards to grow within the grid container */
+  flex-grow: 1;
 }
 
 .done-tasks .task-text {
