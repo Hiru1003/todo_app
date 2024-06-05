@@ -5,8 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI()
-
-# CORS configuration
 origins = [
     "http://localhost:3000",  # React frontend URL
     "http://localhost:5173",  # Vite development server URL
