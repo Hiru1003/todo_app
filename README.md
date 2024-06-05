@@ -15,4 +15,7 @@ React: A JavaScript library for building user interfaces.<br/>
 Axios: A promise-based HTTP client for the browser and Node.js.<br/>
 ### Backend
 FastAPI: A modern, fast (high-performance), web framework for building APIs with Python 3.6+.<br/>
-Uvicorn: A lightning-fast ASGI server implementation, using uvloop and httptools.<br/>
+Uvicorn: A lightning-fast ASGI server implementation, using uvloop and httptools.<br/><br/><br/>
+
+
+<img width="1418" alt="Screenshot 2024-06-05 at 09 54 30" src="https://github.com/Hiru1003/todo_app/assets/122656994/6d823296-4915-412f-95ec-6a2b4a212023">
