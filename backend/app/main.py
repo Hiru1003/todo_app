@@ -1,8 +1,24 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from datetime import datetime
 from typing import List, Optional
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = FastAPI()
+
+# CORS configuration
+origins = [
+    "http://localhost:3000",  # React frontend URL
+    "http://localhost:5173",  # Vite development server URL
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Task(BaseModel):
     task: str
@@ -10,8 +26,9 @@ class Task(BaseModel):
     priority: str
     completedAt: Optional[str] = None
 
-tasks = []
-done_tasks = []
+tasks: List[Task] = []
+done_tasks: List[Task] = []
+
 
 @app.get("/tasks", response_model=List[Task])
 def get_tasks():
@@ -28,23 +45,31 @@ def add_task(task: Task):
 
 @app.delete("/tasks/{task_id}", response_model=Task)
 def delete_task(task_id: int):
+    if task_id < 0 or task_id >= len(tasks):
+        raise HTTPException(status_code=404, detail="Task not found")
+    
     task = tasks.pop(task_id)
     return task
 
 @app.post("/tasks/{task_id}/done", response_model=Task)
 def move_task_to_done(task_id: int):
+    if task_id < 0 or task_id >= len(tasks):
+        raise HTTPException(status_code=404, detail="Task not found")
+
     task = tasks.pop(task_id)
-    task.completedAt = "Completed"
+    task.completedAt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     done_tasks.append(task)
     return task
 
+
 @app.delete("/done-tasks/{task_id}", response_model=Task)
 def delete_done_task(task_id: int):
+    if task_id < 0 or task_id >= len(done_tasks):
+        raise HTTPException(status_code=404, detail="Done task not found")
+    
     task = done_tasks.pop(task_id)
     return task
 
-
-
-
-#python3 -m venv venv
-#source venv/bin/activate
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
