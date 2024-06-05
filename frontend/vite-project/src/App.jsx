@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
+
+const API_URL = 'http://127.0.0.1:8000/';
 
 function App() {
   const [newTask, setNewTask] = useState('');
@@ -9,6 +12,15 @@ function App() {
   const [doneTasks, setDoneTasks] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState('');
+
+  useEffect(() => {
+    axios.get(`${API_URL}tasks`).then(response => {
+      setTasks(response.data);
+    });
+    axios.get(`${API_URL}done-tasks`).then(response => {
+      setDoneTasks(response.data);
+    });
+  }, []);
 
   const handleInputChange = (event) => {
     setNewTask(event.target.value);
@@ -25,16 +37,20 @@ function App() {
   const addTask = () => {
     if (newTask.trim() !== '') {
       const taskToAdd = { task: newTask, date: taskDate, priority: priority, completedAt: null };
-      setTasks([...tasks, taskToAdd]);
-      setNewTask('');
-      setTaskDate('');
+      axios.post(`${API_URL}tasks`, taskToAdd).then(response => {
+        setTasks([...tasks, response.data]);
+        setNewTask('');
+        setTaskDate('');
+      });
     }
   };
 
   const deleteTask = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks.splice(index, 1);
-    setTasks(updatedTasks);
+    axios.delete(`${API_URL}tasks/${index}`).then(() => {
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(index, 1);
+      setTasks(updatedTasks);
+    });
   };
 
   const startEditing = (index) => {
@@ -56,17 +72,22 @@ function App() {
   };
 
   const moveTaskToDone = (index) => {
-    const taskToMove = tasks[index];
-    const completedAt = new Date().toLocaleString();
-    taskToMove.completedAt = completedAt;
-    deleteTask(index);
-    setDoneTasks([...doneTasks, taskToMove]);
+    axios.post(`${API_URL}tasks/${index}/done`).then(response => {
+      const taskToMove = response.data;
+      const updatedTasks = tasks.filter((task, i) => i !== index);
+      setTasks(updatedTasks);
+      setDoneTasks([...doneTasks, taskToMove]);
+    }).catch(error => {
+      console.error('Error moving task to done:', error);
+    });
   };
 
   const deleteDoneTask = (index) => {
-    const updatedDoneTasks = [...doneTasks];
-    updatedDoneTasks.splice(index, 1);
-    setDoneTasks(updatedDoneTasks);
+    axios.delete(`${API_URL}done-tasks/${index}`).then(() => {
+      const updatedDoneTasks = [...doneTasks];
+      updatedDoneTasks.splice(index, 1);
+      setDoneTasks(updatedDoneTasks);
+    });
   };
 
   return (
