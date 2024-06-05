@@ -15,18 +15,20 @@ body {
 
 .top-left-shape {
   position: absolute;
-  top: -230px;
+  top: -150px;
   left: -150px;
   width: 600px; 
   z-index: -1;
+  opacity: 0.2;
 }
 
 .bottom-right-shape {
   position: absolute;
-  bottom: -500px;
+  bottom: -290px;
   right: -200px;
   width: 600px;
   z-index: -1;
+  opacity: 0.2;
 }
 
 
