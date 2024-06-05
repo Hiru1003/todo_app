@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import square from '../src/assets/square.png'
+import blueShape from '../src/assets/img.png'
+import greenShape from '../src/assets/img2.png'
 
 const API_URL = 'http://127.0.0.1:8000/';
 
@@ -93,8 +94,8 @@ function App() {
 
   return (
     <div className="container">
-      <img src={square} alt="Blue Shape" className="top-left-shape" />
-      <img src={square} alt="Green Shape" className="bottom-right-shape" />
+      <img src={blueShape} alt="Blue Shape" className="top-left-shape" />
+      <img src={greenShape} alt="Green Shape" className="bottom-right-shape" />
       <div className="input-column">
         <h1>To-Do List</h1>
         <div className="input-container">
