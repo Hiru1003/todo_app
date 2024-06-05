@@ -10,9 +10,9 @@ View Completed Tasks: Users can view all completed tasks along with the date and
 ## Technologies Used
 
 
-Frontend
+### Frontend
 React: A JavaScript library for building user interfaces.
 Axios: A promise-based HTTP client for the browser and Node.js.
-Backend
+### Backend
 FastAPI: A modern, fast (high-performance), web framework for building APIs with Python 3.6+.
 Uvicorn: A lightning-fast ASGI server implementation, using uvloop and httptools.
