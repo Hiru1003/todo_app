@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import blueShape from '../src/assets/img.png'
+import greenShape from '../src/assets/img2.png'
 
 const API_URL = 'http://127.0.0.1:8000/';
 
@@ -92,7 +94,9 @@ function App() {
 
   return (
     <div className="container">
-      <div className="input-column">
+      {/* <img src={blueShape} alt="Blue Shape" className="top-left-shape" />
+      <img src={greenShape} alt="Green Shape" className="bottom-right-shape" />*/}
+      <div className="input-column"> 
         <h1>To-Do List</h1>
         <div className="input-container">
           <input
@@ -113,8 +117,9 @@ function App() {
           />
           <button onClick={addTask}>Add</button>
         </div>
+    
         <div className="task-list-container">
-          <h2>Tasks</h2>
+          <h2 className='heading-task'>Tasks</h2>
           <ul className="task-cards">
             {tasks.map((task, index) => (
               <li key={index} className="task-card">
@@ -124,6 +129,7 @@ function App() {
                     value={editedTask}
                     onChange={(e) => setEditedTask(e.target.value)}
                   />
+                  
                 ) : (
                   <span className="task-text">{task.task}</span>
                 )}
@@ -131,6 +137,7 @@ function App() {
                 <span className={`priority-badge ${task.priority.toLowerCase()}`}>
                   {task.priority}
                 </span>
+                
                 <div className="task-buttons">
                   {editingIndex === index ? (
                     <>

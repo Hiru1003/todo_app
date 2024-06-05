@@ -11,15 +11,34 @@ body {
   align-items: center;
   min-height: 100vh;
   width: 100vw;
-  background: #f9f5f5; /* Background color */
+  }
+
+.top-left-shape {
+  position: absolute;
+  top: -230px;
+  left: -150px;
+  width: 600px; 
+  z-index: -1;
 }
 
+.bottom-right-shape {
+  position: absolute;
+  bottom: -500px;
+  right: -200px;
+  width: 600px;
+  z-index: -1;
+}
+
+
 h1 {
-  color: black;
+  background: linear-gradient(90deg, #063058,#64c4f4, #07f28c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   width: 100vw;
   margin-bottom: 5%;
 }
+
 
 .container {
   height: 100vh;
@@ -52,32 +71,43 @@ h1 {
   padding: 12px;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #000;
   margin-right: 10px;
   box-sizing: border-box;
   font-size: medium; 
+  background-color: #bae3f7;
+  color: black;
 }
 
 .input-container input[type='text']::placeholder {
-  color: white;
+  color: black;
+  background-color: #bae3f7;
 }
 
 .input-container select {
   padding: 12px 20px;
   font-size: medium; 
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #000;
   margin-right: 10px;
   box-sizing: border-box;
+  background-color: #bae3f7;
+  color: black;
 }
 .input-container input[type='date'] {
   padding: 12px;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #000;
   box-sizing: border-box;
   font-size: medium;
   margin-right: 10px;
+  background-color: #bae3f7;
+  z-index: 1;
+  color: black;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 .input-container button {
@@ -85,29 +115,39 @@ h1 {
   width: 150px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #bae3f7;
+  border: 2px solid #000;
+  color: black;
   cursor: pointer;
+  z-index: 1;
   text-align: center;
 }
 
 .input-container button:hover {
-  background-color: #0056b3;
+  background-color: #031932;
 }
 
 .task-list-container {
-  background-color: #cfe2f3;
   padding: 10% 5% 5%;
   border-radius: 5px;
   height: auto;
   width: 90vw;
 }
 
+.heading-task{
+  z-index: 10000;
+  color: #000;
+  position: relative;
+}
+
+
+
 .task-list-container h2 {
   color: black;
   text-align: center;
   align-self: flex-start;
   margin-bottom: 20px;
+  z-index: 1;
 }
 
 .task-cards {
@@ -118,6 +158,7 @@ h1 {
 }
 
 .task-card {
+  background: linear-gradient(90deg,#bae3f7, #cffde9);
   position: relative;
   background-color: #fff;
   border: 2px solid #000;
@@ -131,6 +172,8 @@ h1 {
   color: black;
   font-size: large;
   padding-left: 5px;
+  z-index: 1;
+
 }
 
 .task-date {
@@ -153,20 +196,21 @@ h1 {
 }
 
 .priority-badge.low {
-  background-color: goldenrod;
+  background-color:lightblue ;
   border: 3px solid #000;
-  color: white;
+  color: #000;
 }
 
 .priority-badge.medium {
-  background-color: orchid;
+  background-color:lavender ;
   border: 3px solid #000;
+  color: #000;
 }
 
 .priority-badge.high {
-  background-color: red;
+  background-color:deepskyblue  ;
   border: 3px solid #000;
-  color: white;
+  color: #000;
 }
 
 .task-buttons {
@@ -183,7 +227,6 @@ h1 {
 }
 
 .done-tasks-container {
-  background-color: #cfe2f3;
   padding: 20px;
   padding: 10% 5% 5%;
   border-radius: 5px;
@@ -255,14 +298,10 @@ h1 {
   font-size: small;
   font-weight: bold;
   text-transform: uppercase;
-  background-color: #28a745; 
+  background-color: lightgoldenrodyellow; 
   border: 3px solid #000;
-  color: white;
+  color: black;
 }
-
-
-
-
 
 
 
