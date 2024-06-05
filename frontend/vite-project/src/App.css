@@ -37,6 +37,8 @@ h1 {
   align-items: center;
   justify-content: flex-start;
   margin-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .input-container {
@@ -218,6 +220,14 @@ h1 {
   color: black;
 }
 
+.donetask-date{
+  color: #898585;
+  font-size: medium;
+  position: absolute;
+  margin-top: 30px;
+  left: 14px;
+}
+
 .done-tasks .task-buttons {
   display: flex;
   gap: 5%;
@@ -230,7 +240,7 @@ h1 {
   padding: 15px;
 }
 
-.done-tasks .task-date {
+.done-tasks {
   color: #898585;
   font-size: medium;
   margin-top: 30px;
@@ -248,4 +258,58 @@ h1 {
   background-color: #28a745; 
   border: 3px solid #000;
   color: white;
+}
+
+
+
+
+
+
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .task-cards,
+  .done-tasks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .task-date, .done-tasks .task-date {
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .task-cards,
+  .done-tasks {
+    grid-template-columns: 1fr;
+  }
+  .task-buttons,
+  .done-tasks .task-buttons {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-buttons,
+  .done-tasks .task-buttons {
+    flex-direction: column;
+    width: 50%;
+    margin-top: 15%;
+    margin-left: 3%;
+  }
+  .task-buttons button,
+  .done-tasks .task-buttons button {
+    width: 110%;
+    margin-bottom: 12px;
+  }
+  .task-date {
+    margin-top: 30px;
+  }
+  .task-text{
+    padding-bottom: 30px;
+  }
+  .donetask-date{
+    margin-top: 39px;
+    font-size: small;
+  }
 }
