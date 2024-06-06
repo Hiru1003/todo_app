@@ -69,5 +69,5 @@ def delete_done_task(task_id: int):
     return task
 
 if __name__ == "__main__":
-    import uvicorn
+    import uvicorn # type: ignore
     uvicorn.run(app, host="0.0.0.0", port=8000)
