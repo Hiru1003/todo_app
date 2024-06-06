@@ -4,6 +4,7 @@ import axios from 'axios';
 import blueShape from '../src/assets/img.png'
 import greenShape from '../src/assets/img2.png'
 
+
 const API_URL = 'http://127.0.0.1:8000/';
 
 function App() {
