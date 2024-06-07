@@ -115,7 +115,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .input-container button {
   padding: 15px;
-  width: 210px;
+  width: 300px;
   border: none;
   border-radius: 5px;
   background: linear-gradient(to right, #c6e9fb, #d1f9e8);

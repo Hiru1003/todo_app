@@ -107,9 +107,9 @@ function App() {
             placeholder="Add a new task..."
           />
           <select value={priority} onChange={handlePriorityChange}>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="Low">Low Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="High">High Priority</option>
           </select>
           <input
             type="date"
@@ -120,7 +120,7 @@ function App() {
         </div>
     
         <div className="task-list-container">
-          <h2 className='heading-task'>Tasks</h2>
+          <h2 className='heading-task'>ToDo Tasks</h2>
           <ul className="task-cards">
             {tasks.map((task, index) => (
               <li key={index} className="task-card">
@@ -156,7 +156,7 @@ function App() {
           </ul>
         </div>
         <div className="done-tasks-container">
-          <h2>Done</h2>
+          <h2>Done Tasks</h2>
           <ul className="done-tasks">
             {doneTasks.map((task, index) => (
               <li key={index} className="task-card">
