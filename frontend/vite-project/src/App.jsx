@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import blueShape from '../src/assets/img.png'
-import greenShape from '../src/assets/img2.png'
-
+import blueShape from '../src/assets/img.png';
+import greenShape from '../src/assets/img2.png';
 
 const API_URL = 'http://127.0.0.1:8000/';
 
@@ -13,6 +12,7 @@ function App() {
   const [taskDate, setTaskDate] = useState('');
   const [tasks, setTasks] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
+  const [summary, setSummary] = useState({ total_tasks: 0, done_tasks: 0 });
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState('');
 
@@ -23,7 +23,14 @@ function App() {
     axios.get(`${API_URL}done-tasks`).then(response => {
       setDoneTasks(response.data);
     });
+    fetchSummary();
   }, []);
+
+  const fetchSummary = () => {
+    axios.get(`${API_URL}summary`).then(response => {
+      setSummary(response.data);
+    });
+  };
 
   const handleInputChange = (event) => {
     setNewTask(event.target.value);
@@ -44,6 +51,7 @@ function App() {
         setTasks([...tasks, response.data]);
         setNewTask('');
         setTaskDate('');
+        fetchSummary();
       });
     }
   };
@@ -53,6 +61,7 @@ function App() {
       const updatedTasks = [...tasks];
       updatedTasks.splice(index, 1);
       setTasks(updatedTasks);
+      fetchSummary();
     });
   };
 
@@ -80,6 +89,7 @@ function App() {
       const updatedTasks = tasks.filter((task, i) => i !== index);
       setTasks(updatedTasks);
       setDoneTasks([...doneTasks, taskToMove]);
+      fetchSummary();
     }).catch(error => {
       console.error('Error moving task to done:', error);
     });
@@ -90,6 +100,7 @@ function App() {
       const updatedDoneTasks = [...doneTasks];
       updatedDoneTasks.splice(index, 1);
       setDoneTasks(updatedDoneTasks);
+      fetchSummary();
     });
   };
 
@@ -118,6 +129,23 @@ function App() {
           />
           <button onClick={addTask}>Add</button>
         </div>
+
+        <div className="summary-container">
+          <h2 className="summary-h2">Summary</h2>
+          <div className="summary-circle">
+            <div className="circle">
+              <p>ToDo Tasks</p>
+              <span>{summary.total_tasks}</span>
+            </div>
+            <div className="circle">
+              <p>Done Tasks</p>
+              <span>{summary.done_tasks}</span>
+            </div>
+          </div>
+        </div>
+
+
+
     
         <div className="task-list-container">
           <h2 className='heading-task'>ToDo Tasks</h2>
@@ -170,6 +198,9 @@ function App() {
             ))}
           </ul>
         </div>
+        
+       
+
       </div>
     </div>
   );

@@ -68,6 +68,14 @@ def delete_done_task(task_id: int):
     task = done_tasks.pop(task_id)
     return task
 
+@app.get("/summary")
+def get_summary():
+    total_tasks = len(tasks)
+    done_tasks_count = len(done_tasks)
+    return {"total_tasks": total_tasks, "done_tasks": done_tasks_count}
+
+
+
 if __name__ == "__main__":
     import uvicorn # type: ignore
     uvicorn.run(app, host="0.0.0.0", port=8000)

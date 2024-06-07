@@ -26,7 +26,7 @@ body {
 
 .bottom-right-shape {
   position: absolute;
-  bottom: -200px;
+  bottom: -450px;
   right: 0px;
   width: 400px;
   z-index: -1;
@@ -319,6 +319,73 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: black;
 }
 
+
+
+
+.summary-container {
+  margin-top: 50px;
+  padding: 10px;
+  text-align: center;
+}
+
+.summary-h2{
+  color: black;
+  text-align: center;
+  margin-bottom: 10px;
+  align-self: flex-start;
+  font-size: x-large;
+  margin-bottom: 30px;
+}
+
+.summary-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.circle {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background-color: transparent; 
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.circle::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #c8e8f8, #ddfbee);
+  z-index: -1; /* Ensure the pseudo-element is behind the content */
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude; /* For Firefox */
+  padding: 10px; /* Match the border thickness */
+}
+
+
+.circle p {
+  margin: 5%;
+}
+
+.circle span {
+  font-size: 38px;
+}
 
 
 
