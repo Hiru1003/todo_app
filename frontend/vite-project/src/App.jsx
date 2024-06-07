@@ -134,7 +134,7 @@ function App() {
           <h2 className="summary-h2">Summary</h2>
           <div className="summary-circle">
             <div className="circle">
-              <p>ToDo Tasks</p>
+              <p>To Do Tasks</p>
               <span>{summary.total_tasks}</span>
             </div>
             <div className="circle">
