@@ -71,3 +71,11 @@ def delete_done_task(task_id: int):
 if __name__ == "__main__":
     import uvicorn # type: ignore
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+
+
+
+#python -m venv venv
+#source venv/bin/activate
+#uvicorn main:app --reload
