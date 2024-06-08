@@ -182,6 +182,7 @@ function App() {
               </li>
             ))}
           </ul>
+          
         </div>
         <div className="done-tasks-container">
           <h2>Done Tasks</h2>
