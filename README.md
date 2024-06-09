@@ -9,7 +9,6 @@ Mark Tasks as Done: Users can mark tasks as completed, moving them to a separate
 View Completed Tasks: Users can view all completed tasks along with the date and time they were marked as done.<br/>
 ## Technologies Used
 
-
 ### Frontend
 React: A JavaScript library for building user interfaces.<br/>
 Axios: A promise-based HTTP client for the browser and Node.js.<br/>
