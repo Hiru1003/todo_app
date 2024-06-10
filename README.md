@@ -1,4 +1,4 @@
-# To-Do WebApp Using React And Python (Fast API)
+# To-Do WebApp Using React And Python (Fast API) 
 This is a simple and efficient To-Do List application built with React for the frontend and FastAPI for the backend.<br/> It allows users to create, edit, delete, and mark tasks as completed.<br/> The application is designed to help users manage their daily tasks effectively.<br/>
 
 ## Features
